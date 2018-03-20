@@ -74,11 +74,12 @@
             <button type="button" id="postcancel" name="postcancel" class="close" data-dismiss="modal" onclick="commentclose()">&times;</button>
             <h4 class="modal-title">New Post</h4>
           </div>
-          <div class="modal-body" name="postbody" id="postbody">
+          <div class="modal-body">
                 <!--   <div class="form-group">
                        <label for="pcwid">CWID</label>
                        <input type="text" class="form-control" id="pcwid" placeholder="Enter your CWID"/>
                    </div>-->
+                   <form role="form" id="postmodal">
                    <div class="form-group">
                        <label for="postTitle">Post Title</label>
                        <input type="text" class="form-control" id="postTitle" placeholder="Title"/>
@@ -88,11 +89,13 @@
                        <textarea class="form-control" id="postBody" placeholder="Enter your message"></textarea>
                        <input type="hidden" id="di_id" value = "<?php echo (isset($result->d_id))?$result->d_id:'';?>" />
                    </div>
+                   </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary submitBtn" onclick="submitPostForm()" >Submit</button>
             <button type="button" class="btn btn-warning" data-dismiss="modal" id="postcancel" name="postcancel" onclick="commentclose()">Close</button>
           </div>
+
         </div>
       </div>
     </div>  <!-- Modal end for adding Post -->
@@ -115,9 +118,6 @@
     $('#dlist').css('display','block');
     $('#disclist').css('display','none'); //hiding the button create new discussion and view on-going discussions
   }
-
-
-
   function addComments(myURL){
     var resultUrl = myURL;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
     console.log(resultUrl);
@@ -126,12 +126,10 @@
     $('#dlist').css('display','none');
     $('#disclist').css('display','none'); //hiding the button create new discussion and view on-going discussions
   }
-
   function addNewComment(someid){
     var postid = someid;
     $('#myComment').modal('show');
   }
-
   function commentclose(){
     $("#postTitle").val("");
     $("#postBody").val("");
@@ -140,51 +138,37 @@
     $("#postBody-error").hide();
     $(".error").removeClass(".my-error-class");
     $('#myModal').modal('hide');
-
   }
-
     //validate post MODAL
-    $("#postbody").validate({
-     errorClass: "my-error-class",
-      rules: {
-        postTitle:"required",
-        postBody:"required",
-         postTitle: {
-            required: true,
-            minlength: 8,
-            maxlength: 255
-         },
-         postBody: {
-            required: true,
-            minlength: 20,
-            maxlength: 500
-         },
-      },
-      messages: {
-         postTitle: {
-            required: "Post title required",
-            minlength: "Your post title must be at least 8 characters long",
-            maxlength: "Your post title must be of maximum 255 characters"
-         },
-         postBody: {
-            required: "Post body required",
-            minlength: "Your post body must be at least 20 characters long",
-            maxlength: "Your post body must be of maximum 500 characters"
-         }
-      },
-      onfocusout: function (element) {
-        $(element).valid();
-      }
+    $(document).ready(function(){
+      $("#postmodal").validate({
+       errorClass: "my-error-class",
+        rules: {
+          postTitle:"required",
+          postBody:"required",
+           postTitle: {
+              minlength: 8,
+              maxlength: 255
+           },
+           postBody: {
+              minlength: 20,
+              maxlength: 500
+           },
+        },
+        messages: {
+           postTitle: {
+              required: "Post title required",
+              minlength: "Your post title must be at least 8 characters long",
+              maxlength: "Your post title must be of maximum 255 characters"
+           },
+           postBody: {
+              required: "Post body required",
+              minlength: "Your post body must be at least 20 characters long",
+              maxlength: "Your post body must be of maximum 500 characters"
+           }
+        }
+      });
     });
-    $("#postcancel").click(function() {
-      $("#postTitle").val("");
-      $("#postBody").val("");
-      //$("#cwid-error").hide();
-      $("#postTitle-error").hide();
-      $("#postBody-error").hide();
-      $(".error").removeClass(".my-error-class");
-     //alert("clicked cancel");
-   });
   </script>
 </body>
 </html>
