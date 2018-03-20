@@ -139,7 +139,8 @@
     $("#postTitle-error").hide();
     $("#postBody-error").hide();
     $(".error").removeClass(".my-error-class");
-    $('#myComment').modal('hide');
+    $('#myModal').modal('hide');
+
   }
 
     //validate post MODAL
