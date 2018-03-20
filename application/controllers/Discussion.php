@@ -191,7 +191,6 @@ class Discussion extends CI_Controller
 		public function search_discussion(){
 			$data['title'] = "Marist Disussion Forums";
 			$ds_num = $this->uri->segment(3);
-			//$data['cwid'] = $_SESSION['user'];
 			$did = $this->Discussion_model->find_discussion($ds_num);
 			if($did != '') {
 				$discussion_data['query'] = $this->Discussion_model->fetch_discussion($did);

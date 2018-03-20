@@ -75,10 +75,6 @@
             <h4 class="modal-title">New Post</h4>
           </div>
           <div class="modal-body">
-                <!--   <div class="form-group">
-                       <label for="pcwid">CWID</label>
-                       <input type="text" class="form-control" id="pcwid" placeholder="Enter your CWID"/>
-                   </div>-->
                    <form role="form" id="postmodal">
                    <div class="form-group">
                        <label for="postTitle">Post Title</label>
@@ -139,36 +135,33 @@
     $(".error").removeClass(".my-error-class");
     $('#myModal').modal('hide');
   }
-    //validate post MODAL
-    $(document).ready(function(){
-      $("#postmodal").validate({
-       errorClass: "my-error-class",
-        rules: {
-          postTitle:"required",
-          postBody:"required",
-           postTitle: {
-              minlength: 8,
-              maxlength: 255
-           },
-           postBody: {
-              minlength: 20,
-              maxlength: 500
-           },
-        },
-        messages: {
-           postTitle: {
-              required: "Post title required",
-              minlength: "Your post title must be at least 8 characters long",
-              maxlength: "Your post title must be of maximum 255 characters"
-           },
-           postBody: {
-              required: "Post body required",
-              minlength: "Your post body must be at least 20 characters long",
-              maxlength: "Your post body must be of maximum 500 characters"
-           }
-        }
-      });
-    });
+  $("#postmodal").validate({
+   errorClass: "my-error-class",
+    rules: {
+      postTitle:"required",
+      postBody:"required",
+       postTitle: {
+          minlength: 8,
+          maxlength: 255
+       },
+       postBody: {
+          minlength: 20,
+          maxlength: 500
+       },
+    },
+    messages: {
+       postTitle: {
+          required: "Post title required",
+          minlength: "Your post title must be at least 8 characters long",
+          maxlength: "Your post title must be of maximum 255 characters"
+       },
+       postBody: {
+          required: "Post body required",
+          minlength: "Your post body must be at least 20 characters long",
+          maxlength: "Your post body must be of maximum 500 characters"
+       }
+    }
+  });
   </script>
 </body>
 </html>

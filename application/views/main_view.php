@@ -104,10 +104,7 @@
     			<a href="http://www.marist.edu/disclaimers.html" target="_blank" >Disclaimers</a> | <a href="http://www.marist.edu/privacy.html" target="_blank" >Privacy Policy</a>
     	        </p>
     	    </div>
-
-
           <script type="text/javascript" class="init">
-
     			$(document).ready(function(){
             var resultUrll = '<?php echo base_url('c=Discussion&m=discussionList') ?>';
      				$('#disclist').load(resultUrll);
@@ -115,8 +112,6 @@
     				$("#navi").click(function(){
     					window.location.href = '<?php echo base_url() ?>';
     				});
-
-
     				//validation for create discussions
             $("#newModalDisc").validate({
     					errorClass: "my-error-class",
@@ -203,7 +198,6 @@
     							});
     					}
     			}
-
     			//this method submits the newly created discussion and returns to the discussion details page.
     			function submitDiscussionForm(){
     					var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
@@ -214,7 +208,8 @@
     					console.log("discussion title:"+ds_title);
     					var ds_body = $('#ds_body').val();
     					console.log("discussion body:"+ds_body);
-    					var ds_num = Math.random() * 1000000;
+    					//var r_num = Math.random() * 1000;
+							var ds_num = Math.floor((Math.random() * 10000) + 1);
     					console.log("discussion random number:"+ds_num);
     					if(category.trim() == '' ){
     							alert('Please enter the discussion category.');
@@ -248,12 +243,21 @@
     											}else{
     													$('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
     											}
-    											fetchDiscussion('<?php echo base_url()?>'+'Discussion/search_discussion/'+ds_num);
+													var resultUrl = '<?php echo base_url()?>'+'Discussion/search_discussion/'+ds_num;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
+						    			    console.log(resultUrl);
+						    					//$('#ddetails').empty();
+						    					$('#dlist').css('display','none');
+						    					$('#disclist').css('display','none');
+						    			    $('#ddetails').load(resultUrl);
+						    			    $('#ddetails').css('display','block');
+													$('#disclist').empty();
+													$('#dlist').empty();
 													console.log('<?php echo base_url()?>'+'Discussion/search_discussion/'+ds_num);
+													//fetchDiscussion('<?php //echo base_url()?>'+'Discussion/search_discussion/'+ds_num);
     											$('.submitBtn').removeAttr("disabled");
     											$('.modal-body').css('opacity', '');
     											$('#newModal').modal('hide');
-
+													$('.modal-backdrop').remove();
     											$(document).on('hidden.bs.modal','#newModal', function () {
 														$('.modal-backdrop').remove();
     								});
@@ -261,14 +265,6 @@
     						});
     					}
     				}
-    			/*function fetchList(myURL){
-    				var resultUrl = myURL;//document.getElementById('getURL').value; //"<//?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
-    				console.log(resultUrl);
-    				$('#dlist').load(resultUrl);
-    				$('#dlist').css('display','block');//showing the list of discussion
-    				$('#main_page').css('display','none'); //hiding the button create new discussion and view on-going discussions
-    				//console.log(resultUrl);
-    			}*/
     				$(function(){
     					$(".dropdown-menu option a").click(function(){
     						$("#cat:first-child").text($(this).text());
@@ -287,16 +283,7 @@
     			    //console.log(resultUrl);
     			  }
     				function fetchDiscussion(myURL){
-    			    var resultUrl = myURL;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
-    			    console.log(resultUrl);
-    					$('#ddetails').empty();
-    					$('#dlist').css('display','none');
-    					$('#disclist').css('display','none');
-    			    $('#ddetails').load(resultUrl);
-    			    $('#ddetails').css('display','block');//showing the list of discussion
-    			    //$('#main_page').css('display','none'); //hiding the button create new discussion and view on-going discussions
-    			    //$('#dlist').css('display','none');//hiding the list of on going discussions
-    			    //console.log(resultUrl);
+
     			  }
 
     				function fetchPost(myURL){
@@ -314,90 +301,7 @@
     			  function commentclose(){
     			    $('#myComment').modal('hide');
     			  }
-    				//showing the newly discussion created
-            $("#contactForm").submit(function(event){
-              alert("new ajax");
-              /* stop form from submitting normally */
-              event.preventDefault();
-
-              /* get some values from elements on the page: */
-              var $form = $( this ),
-                  $submit = $form.find( 'button[type="submit"]' ),
-     						 cat_value = $form.find( 'select[name="category"]' ).val(),
-                  dstitle_value = $form.find( 'input[name="ds_title"]' ).val(),
-                  dsbody_value = $form.find( 'textarea[name="ds_body"]' ).val(),
-                  url = $form.attr('action');
-
-              /* Send the data using post */
-              var posting = $.post( url, {
-                                category: cat_value,
-                                ds_title: dstitle_value,
-                                ds_body: dsbody_value
-                            });
-
-              posting.done(function( data )
-              {
-                  /* Put the results in a div */
-                  $( "#contactResponse" ).html(data);
-
-                  /* Change the button text. */
-                  $submit.text('Sent, Thank you');
-
-                  /* Disable the button. */
-                  $submit.attr("disabled", true);
-              });
-							function submitCommentForm(){
-		    					var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-		    					//var cwid = $('#ccwid').val();
-		    					var cbody = $('#commentBody').val();
-		    					console.log("this is your message\n"+cbody);
-		    					var p_id = $('#post_id').val();
-		    					console.log("adding your reply to post:"+p_id);
-		    					//alert(cbody);
-
-		    					/*if(cwid.trim() == '' ){
-		    							alert('Please enter your CWID.');
-		    							$('#ccwid').focus();
-		    							return false;
-		    					}else */
-		    					if(cbody.trim() == '' ){
-		    							alert('Please enter your message.');
-		    							$('#commentBody').focus();
-		    							return false;
-		    					}else{
-		    							$.ajax({
-		    									type:'POST',
-		    									url:'<?php echo base_url() ?>'+'Discussion/addNewComment', //+cwid+'/'+title+'/'+body+'/'+d_id
-		    									//data:'contactFrmSubmit=1&cwid='+cwid+'&postTitle='+title+'&postBody='+body+'&d_id='+d_id,//,
-		    									data:{/*'cwid' :cwid,*/ 'p_id' : p_id, 'commentBody':cbody},
-		    									beforeSend: function () {
-		    											$('.submitBtn').attr("disabled","disabled");
-		    											$('.modal-body').css('opacity', '.5');
-		    									},
-		    									success:function(msg){
-		    											if(msg == 'ok'){
-		    													//$('#ccwid').val('');
-		    													$('#commentBody').val('');
-		    													$('.statusMsg').html('<span style="color:green;">Thanks for contacting us, we\'ll get back to you soon.</p>');
-		    											}else{
-		    													$('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
-		    											}
-		    											$('.submitBtn').removeAttr("disabled");
-		    											$('.modal-body').css('opacity', '');
-		    											$('#myComment').modal('hide');
-		    											$(document).on('hidden.bs.modal','#myComment', function () {
-		    												//document.location.reload();
-		    												//window.location.href='<?php //echo base_url()?>'+'Discussion/commentView/'+p_id;//document.getElementById('anchorid');
-		    												//console.log();
-		    												fetchComments('<?php echo base_url()?>'+'Discussion/seeReplyView/'+p_id);
-		    										    $(this).find('input[name="post_id"]').val("");
-		    											})
-		    									}
-		    							});
-		    					}
-		    			}
-    			 });
-					 $("#cancel").click(function() {
+					$("#cancel").click(function() {
 						 $("#category:first-child").text("Select Discussion Category");
 						 $("#category:first-child").val("default");
 						 $("#ds_title").val("");
@@ -408,6 +312,6 @@
 						 $(".error").removeClass(".my-error-class");
 						//alert("clicked cancel");
 					});
-    			</script>
-        </body>
-      </html>
+				</script>
+			</body>
+			</html>

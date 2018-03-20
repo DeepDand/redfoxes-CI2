@@ -88,8 +88,6 @@ class Discussion_model extends CI_Model
 			return false;
 		}
 	}
-
-
 	public function count_post($did){
 		//function to fetch discussions details from the database
 		$condition = 'd_id='."'".$did."'";
