@@ -1,38 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <title>Marist Discussion Forum</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-  <!-- jQuery -->
-  <!-- BS JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="<?php echo base_url();?>/js/jquery.easyPaginate.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./css/redfox.css">
   <style>
-    .easyPaginateNav a {
-      padding:5px;float: inherit;color: #000;
-      text-decoration: none;
-    }
-    .easyPaginateNav a.current {
-      font-weight:bold;background-color: #4CAF50;color: #000;border-radius: 8px;text-decoration: none;
-    }
-    .easyPaginateNav a.active {
-      background-color: #4CAF50;color: #000;
-      color: white;text-decoration: none;
-    }
-    .easyPaginate a:hover:not(.active) {background-color: #ddd;}
-  </style>
+  .easyPaginateNav a {
+    padding:5px;float: inherit;color: #000;
+    text-decoration: none;
+  }
+  .easyPaginateNav a.current {
+    font-weight:bold;background-color: #4CAF50;color: #000;border-radius: 8px;text-decoration: none;
+  }
+  .easyPaginateNav a.active {
+    background-color: #4CAF50;color: #000;
+    color: white;text-decoration: none;
+  }
+  .easyPaginate a:hover:not(.active) {background-color: #ddd;}
+
+</style>
 </head>
-<body>
   <div class="container fluid">
     <h2>Discussion body</h2>
     <!--View to show the body of discussions, forums and comments on the discussions -->
     <div class="list-group list-group-item">
-      <?php
-    if($query->result()) {
+      <?php if($query->result()) {
       foreach ($query->result() as $result) : $this->input->post($result->d_title,$result->cwid,$result->d_id,$result->d_body); //$d_id=$result->d_id;?>
         <h4 class="list-group-item-heading">Title: <?php echo $result->d_title; ?></h4>
         <p class="list-group-item-text" style="color:gray"><?php echo "Created by ".$result->cwid; ?></p>
@@ -45,20 +33,28 @@
     <?php } ?>
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Reply</button>
     <br /><br />
-    <div class="list-group" style="margin-left:20px" id="easyPaginate" name="easyPaginate">
-      <?php
-      if($postquery) {
-      foreach ($postquery->result() as $postresult) : $this->input->post($postresult->p_title,$postresult->p_body);?>
-      <li class="list-group-item">
-      <h4 class="list-group-item-heading">Post title: <?php echo $postresult->p_title; ?></h4>
-      <input type="hidden" id="p_id" value = "<?php echo (isset($postresult->p_id))?$postresult->p_id:'';?>" />
-      <p class="list-group-item-text" style="color:gray"><?php echo "Created by ".$postresult->cwid; ?></p>
-      <p><?php echo $postresult->p_body; ?></p>
-      <div id="viewreplies" name="viewreplies"></div>
-      <input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'Discussion/commentView/'.$postresult->p_id; ?>"></input><!--this is to pass urls to specific discussions -->
-    </li><br />
-<?php endforeach;?>
+    <div class="list-group" style="margin-left:20px" id="eeasyPaginate" name="eeasyPaginate">
+      <table id="postdatatable"  class="table table-striped table-bordered responsive" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          if($postquery) {
+          foreach ($postquery->result() as $postresult) : $this->input->post($postresult->p_title,$postresult->p_body);?>
+            <!--<li class="list-group-item">-->
+            <tr>
+              <!--<h4 class="list-group-item-heading">Post title: <//?php echo $postresult->p_title; ?></h4>-->
+              <td><input type="hidden" id="p_id" value = "<?php echo (isset($postresult->p_id))?$postresult->p_id:'';?>" /><p><?php echo $postresult->p_body; ?></p><br />
+              <p class="list-group-item-text" style="color:gray"><?php echo "Reply from ".$postresult->cwid; ?></p><input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'Discussion/commentView/'.$postresult->p_id; ?>"></input></td><!--this is to pass urls to specific discussions
+            </li>-->
+          </tr>
+          <?php endforeach;?>
+        </tbody>
   </div>
+</table>
   <div id="pagination"></div>
   <?php } else {?>
       <div class="list-group list-group-item">
@@ -76,10 +72,10 @@
           </div>
           <div class="modal-body">
                    <form role="form" id="postmodal">
-                   <div class="form-group">
+                  <!-- <div class="form-group">
                        <label for="postTitle">Post Title</label>
                        <input type="text" class="form-control" id="postTitle" placeholder="Title"/>
-                   </div>
+                   </div>-->
                    <div class="form-group">
                        <label for="postBody">Post Body</label>
                        <textarea class="form-control" id="postBody" placeholder="Enter your message"></textarea>
@@ -100,7 +96,10 @@
     </div>
     <!--<?php// echo form_close(); ?>-->
     <script type="text/javascript">
+    $(document).ready( function () {
 
+    });
+    $('#postdatatable').DataTable();
     $('#easyPaginate').easyPaginate({
 	      paginateElement: 'li',
 	      elementsPerPage: 3,
@@ -127,10 +126,10 @@
     $('#myComment').modal('show');
   }
   function commentclose(){
-    $("#postTitle").val("");
+    //$("#postTitle").val("");
     $("#postBody").val("");
     //$("#cwid-error").hide();
-    $("#postTitle-error").hide();
+    //$("#postTitle-error").hide();
     $("#postBody-error").hide();
     $(".error").removeClass(".my-error-class");
     $('#myModal').modal('hide');
@@ -138,23 +137,23 @@
   $("#postmodal").validate({
    errorClass: "my-error-class",
     rules: {
-      postTitle:"required",
+      //postTitle:"required",
       postBody:"required",
-       postTitle: {
-          minlength: 8,
-          maxlength: 255
-       },
+       //postTitle: {
+      //    minlength: 8,
+      //    maxlength: 255
+      // },
        postBody: {
           minlength: 20,
           maxlength: 500
        },
     },
     messages: {
-       postTitle: {
-          required: "Post title required",
-          minlength: "Your post title must be at least 8 characters long",
-          maxlength: "Your post title must be of maximum 255 characters"
-       },
+       //postTitle: {
+      //    required: "Post title required",
+      //    minlength: "Your post title must be at least 8 characters long",
+      //    maxlength: "Your post title must be of maximum 255 characters"
+       //},
        postBody: {
           required: "Post body required",
           minlength: "Your post body must be at least 20 characters long",
@@ -163,5 +162,3 @@
     }
   });
   </script>
-</body>
-</html>

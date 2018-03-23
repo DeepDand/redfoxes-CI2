@@ -10,7 +10,10 @@
     		<link rel="stylesheet" href="./css/redfox.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+				<script src="<?php echo base_url();?>/js/jquery.easyPaginate.js"></script>
+				<script type="text/javascript" src="datatables/datatables.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css"/>
         <style>
@@ -48,6 +51,7 @@
           <div id="disclist" name="disclist" class="col-md-8"><!--This shows the list of discussion on the first page - Uses datatables --></div>
 					<div id="dlist" name="dlist" class="col-md-8"><!--This div is for displaying the discussion details when one of the link from the datatable of discussion list is clicked. --></div>
 					<div id="ddetails"><!-- This is to show the newly created discussion. --></div>
+					</div>
           <!-- Modal for adding new Discussion -->
   		    <div class="modal fade" id="newModal" name="newModal" role="dialog" >
   		      <div class="modal-dialog">
@@ -106,7 +110,7 @@
     	    </div>
           <script type="text/javascript" class="init">
     			$(document).ready(function(){
-            var resultUrll = '<?php echo base_url('c=Discussion&m=discussionList') ?>';
+            var resultUrll = '<?php echo base_url('Discussion/discussionList') ?>';
      				$('#disclist').load(resultUrll);
      				$('#disclist').css('display','block');
     				$("#navi").click(function(){
@@ -146,9 +150,10 @@
     					 }
     				 });
     			 });
-           function submitPostForm(){
+	           function submitPostForm(){
     					var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-    					var ptitle = $('#postTitle').val();
+    					//var ptitle = $('#postTitle').val();
+							var ptitle = 'default';
     					var pbody = $('#postBody').val();
     					var d_id = $('#di_id ').val();
     					if(ptitle.trim() == '' ){
@@ -173,24 +178,25 @@
     									success:function(msg){
     											if(msg == 'ok'){
     													//$('#cwid').val('');
-    													$('#postTitle').val('');
+    													//$('#postTitle').val('');
     													$('#postBody').val('');
     													$('.statusMsg').html('<span style="color:green;">Thanks for contacting us, we\'ll get back to you soon.</p>');
     											}else{
     													$('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
     											}
-    											var resultUrl = '<?php echo base_url()?>'+'Discussion/search_discussion/'+d_id;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
+													var resultUrl = '<?php echo base_url()?>'+'Discussion/search_discussion/'+d_id;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
     									    console.log(resultUrl);
     											$('#ddetails').empty();
     											$('#dlist').css('display','none');
     											$('#disclist').css('display','none');
     									    $('#ddetails').load(resultUrl);
+
     									    $('#ddetails').css('display','block');
     											//fetchPost('<?php //echo base_url()?>'+'Discussion/search_discussion/'+d_id);
     											$('.submitBtn').removeAttr("disabled");
     											$('.modal-body').css('opacity', '');
     											$('#myModal').modal('hide');
-    											$('.modal-backdrop').remove();
+    											//$('.modal-backdrop').remove();
     											$(document).on('hidden.bs.modal','#myModal', function () {
     												$('.modal-backdrop').remove();
     												});
@@ -250,6 +256,7 @@
 						    					$('#disclist').css('display','none');
 						    			    $('#ddetails').load(resultUrl);
 						    			    $('#ddetails').css('display','block');
+
 													$('#disclist').empty();
 													$('#dlist').empty();
 													console.log('<?php echo base_url()?>'+'Discussion/search_discussion/'+ds_num);
@@ -257,9 +264,10 @@
     											$('.submitBtn').removeAttr("disabled");
     											$('.modal-body').css('opacity', '');
     											$('#newModal').modal('hide');
-													$('.modal-backdrop').remove();
+													//$('.modal-backdrop').remove();
     											$(document).on('hidden.bs.modal','#newModal', function () {
 														$('.modal-backdrop').remove();
+
     								});
     							}
     						});
@@ -282,9 +290,9 @@
     			    //$('#dlist').css('display','none');//hiding the list of on going discussions
     			    //console.log(resultUrl);
     			  }
-    				function fetchDiscussion(myURL){
+    				//function fetchDiscussion(myURL){
 
-    			  }
+    			  //}
 
     				function fetchPost(myURL){
     			    var resultUrl = myURL;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
@@ -312,6 +320,11 @@
 						 $(".error").removeClass(".my-error-class");
 						//alert("clicked cancel");
 					});
+					$('#easyPaginate').easyPaginate({
+				      paginateElement: 'li',
+				      elementsPerPage: 3,
+				      effect: 'climb'
+				});
 				</script>
 			</body>
 			</html>

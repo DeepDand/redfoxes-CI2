@@ -79,7 +79,7 @@ class Discussion extends CI_Controller
 					 $data['title'] = "Marist Disussion Forums";
 					 $ad = $_GET['ticket'];
 		 			$this->session->set_userdata('ad',$access);
-	 				$this->load->view('createDiscussion_view',$data);
+	 				$this->load->view('main_view',$data);
 					 } else {
 						 echo "<h1>UnAuthorized Access</h1>";
 					 }
