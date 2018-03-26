@@ -58,6 +58,7 @@
 				<div id="ddetails"></div>
 				<div id="ddetails1"></div>
 				<div id="disclist" name="disclist" class="col-md-8"></div>
+				<div id="dlist" class="col-md-9 fluid"></div>
 				<div id="newDisc" class="form-horizontal"></div>
 				<!-- Modal for adding Post -->
 		    <div class="modal fade" id="newModal" name="newModal" role="dialog" >
@@ -112,12 +113,7 @@
 		      </div>
 		    </div>  <!-- Modal end for adding Post -->
 			</div>
-			<div id="dlist" class="col-md-9 fluid"></div>
-
-			<div id="contactResponse"></div>
-			<div id="comments"></div>
 	    </div>
-
 			<div class="bottom_container">
 	        <p class = "foot">
 	            James A. Cannavino Library, 3399 North Road, Poughkeepsie, NY 12601; 845.575.3199
@@ -134,15 +130,11 @@
 					window.location.href = '<?php echo base_url() ?>';
 					//window.location.replace = "http://localhost/redfoxes/Discussion/createDiscussion_view";
 				});
-
-
 				var resultUrll = "<?php echo base_url()?>"+'Discussion/discussionList';
 				$('#disclist').load(resultUrll);
-				$('#disclist').css('display','block');
+				//$('#disclist').css('display','block');
 				//$('#newDisc').css('display','block');
-                $('#ddetails').css('display','block');
-
-
+        $('#ddetails').css('display','block');
 				//validation for create discussions
 				$("#newModalDisc").validate({
 					errorClass: "my-error-class",
@@ -188,8 +180,6 @@
 						 $(element).valid();
 					 }
 				 });
-
-
 				 $("#cancel").click(function() {
 					 $("#cat:first-child").text("Select Discussion Category");
 					 $("#cat:first-child").val("default");
@@ -202,13 +192,10 @@
 					//alert("clicked cancel");
 				 });
 			 });
-			 var create = document.getElementById("newDisc");
-			 var view = document.getElementById("discList");
-
 			function submitPostForm(){
 					var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
 					//var pcwid = $('#pcwid').val();
-					var ptitle = $('#postTitle').val();
+					var ptitle = 'default';
 					var pbody = $('#postBody').val();
 					var d_id = $('#di_id ').val();
 
@@ -219,7 +206,7 @@
 					}else */
 					if(ptitle.trim() == '' ){
 							alert('Please enter your post title.');
-							$('#postTitle').focus();
+							//$('#postTitle').focus();
 							return false;
 					}else if(pbody.trim() == '' ){
 							alert('Please enter your message.');
@@ -238,16 +225,14 @@
 											//alert('inside success');
 									},
 									success:function(msg){
-
 											if(msg == 'ok'){
 													//$('#cwid').val('');
-													$('#postTitle').val('');
+													//$('#postTitle').val('');
 													$('#postBody').val('');
 													$('.statusMsg').html('<span style="color:green;">Thanks for contacting us, we\'ll get back to you soon.</p>');
 											}else{
 													$('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
 											}
-
 											var resultUrl = '<?php echo base_url()?>'+'Discussion/search_discussion/'+d_id;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
 									    console.log(resultUrl);
 											$('#ddetails').empty();
@@ -375,13 +360,14 @@
 											}else{
 													$('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
 											}
-											fetchDiscussion('<?php echo base_url()?>'+'Discussion/search_discussion/'+ds_num);
+
 											$('.submitBtn').removeAttr("disabled");
 											$('.modal-body').css('opacity', '');
 											$('#newModal').modal('hide');
 											$('.modal-backdrop').remove();
-											$(document).on('hidden.bs.modal','#newModal', function () {
-								});
+											fetchDiscussion('<?php echo base_url()?>'+'Discussion/search_discussion/'+ds_num);
+										//	$(document).on('hidden.bs.modal','#newModal', function () {
+								//});
 							}
 						});
 					}

@@ -1,4 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <title>Marist Discussion Forum</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+  <!-- jQuery -->
+  <!-- BS JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url();?>/js/jquery.easyPaginate.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <link rel="stylesheet" href="./css/redfox.css">
   <style>
   .easyPaginateNav a {
@@ -16,6 +28,7 @@
 
 </style>
 </head>
+<body>
   <div class="container fluid">
     <h2>Discussion body</h2>
     <!--View to show the body of discussions, forums and comments on the discussions -->
@@ -33,28 +46,17 @@
     <?php } ?>
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Reply</button>
     <br /><br />
-    <div class="list-group" style="margin-left:20px" id="eeasyPaginate" name="eeasyPaginate">
-      <table id="postdatatable"  class="table table-striped table-bordered responsive" cellspacing="0" width="100%">
-        <thead>
-          <tr>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
+    <div class="list-group" style="margin-left:20px" id="easyPaginate" name="easyPaginate">
           <?php
           if($postquery) {
           foreach ($postquery->result() as $postresult) : $this->input->post($postresult->p_title,$postresult->p_body);?>
-            <!--<li class="list-group-item">-->
-            <tr>
+            <li class="list-group-item">
               <!--<h4 class="list-group-item-heading">Post title: <//?php echo $postresult->p_title; ?></h4>-->
-              <td><input type="hidden" id="p_id" value = "<?php echo (isset($postresult->p_id))?$postresult->p_id:'';?>" /><p><?php echo $postresult->p_body; ?></p><br />
-              <p class="list-group-item-text" style="color:gray"><?php echo "Reply from ".$postresult->cwid; ?></p><input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'Discussion/commentView/'.$postresult->p_id; ?>"></input></td><!--this is to pass urls to specific discussions
-            </li>-->
-          </tr>
+              <input type="hidden" id="p_id" value = "<?php echo (isset($postresult->p_id))?$postresult->p_id:'';?>" /><p><?php echo $postresult->p_body; ?></p><br />
+              <p class="list-group-item-text" style="color:gray"><?php echo "Reply from ".$postresult->cwid; ?></p><input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'Discussion/commentView/'.$postresult->p_id; ?>"></input><!--this is to pass urls to specific discussions-->
+            </li>
           <?php endforeach;?>
-        </tbody>
   </div>
-</table>
   <div id="pagination"></div>
   <?php } else {?>
       <div class="list-group list-group-item">
@@ -96,13 +98,10 @@
     </div>
     <!--<?php// echo form_close(); ?>-->
     <script type="text/javascript">
-    $(document).ready( function () {
-
-    });
-    $('#postdatatable').DataTable();
+    //$('#postdatatable').DataTable();
     $('#easyPaginate').easyPaginate({
 	      paginateElement: 'li',
-	      elementsPerPage: 3,
+	      elementsPerPage: 5,
 	      effect: 'climb'
 	});
   function fetchComments(myURL){
@@ -126,10 +125,7 @@
     $('#myComment').modal('show');
   }
   function commentclose(){
-    //$("#postTitle").val("");
     $("#postBody").val("");
-    //$("#cwid-error").hide();
-    //$("#postTitle-error").hide();
     $("#postBody-error").hide();
     $(".error").removeClass(".my-error-class");
     $('#myModal').modal('hide');
@@ -162,3 +158,5 @@
     }
   });
   </script>
+</body>
+</html>

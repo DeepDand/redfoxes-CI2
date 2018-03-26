@@ -12,8 +12,8 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-				<script src="<?php echo base_url();?>/js/jquery.easyPaginate.js"></script>
 				<script type="text/javascript" src="datatables/datatables.min.js"></script>
+				<script src="<?php echo base_url();?>/js/jquery.easyPaginate.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="datatables/datatables.min.css"/>
         <style>
@@ -51,7 +51,7 @@
           <div id="disclist" name="disclist" class="col-md-8"><!--This shows the list of discussion on the first page - Uses datatables --></div>
 					<div id="dlist" name="dlist" class="col-md-8"><!--This div is for displaying the discussion details when one of the link from the datatable of discussion list is clicked. --></div>
 					<div id="ddetails"><!-- This is to show the newly created discussion. --></div>
-					</div>
+
           <!-- Modal for adding new Discussion -->
   		    <div class="modal fade" id="newModal" name="newModal" role="dialog" >
   		      <div class="modal-dialog">
@@ -100,7 +100,8 @@
   		        </div>
   		      </div>
   		    </div>  <!-- Modal end for adding discussion -->
-          <div class="bottom_container">
+          </div>
+					<div class="bottom_container">
     	        <p class = "foot">
     	            James A. Cannavino Library, 3399 North Road, Poughkeepsie, NY 12601; 845.575.3199
     	            <br />
@@ -108,6 +109,7 @@
     			<a href="http://www.marist.edu/disclaimers.html" target="_blank" >Disclaimers</a> | <a href="http://www.marist.edu/privacy.html" target="_blank" >Privacy Policy</a>
     	        </p>
     	    </div>
+
           <script type="text/javascript" class="init">
     			$(document).ready(function(){
             var resultUrll = '<?php echo base_url('Discussion/discussionList') ?>';
@@ -184,19 +186,12 @@
     											}else{
     													$('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
     											}
-													var resultUrl = '<?php echo base_url()?>'+'Discussion/search_discussion/'+d_id;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
-    									    console.log(resultUrl);
-    											$('#ddetails').empty();
-    											$('#dlist').css('display','none');
-    											$('#disclist').css('display','none');
-    									    $('#ddetails').load(resultUrl);
 
-    									    $('#ddetails').css('display','block');
-    											//fetchPost('<?php //echo base_url()?>'+'Discussion/search_discussion/'+d_id);
+													fetchPost('<?php echo base_url()?>'+'Discussion/search_discussion/'+d_id);
     											$('.submitBtn').removeAttr("disabled");
     											$('.modal-body').css('opacity', '');
     											$('#myModal').modal('hide');
-    											//$('.modal-backdrop').remove();
+    											$('.modal-backdrop').remove();
     											$(document).on('hidden.bs.modal','#myModal', function () {
     												$('.modal-backdrop').remove();
     												});
@@ -298,8 +293,8 @@
     			    var resultUrl = myURL;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
     			    console.log(resultUrl);
     					$('#ddetails').empty();
-    					//$('#dlist').css('display','none');
-    					//$('#disclist').css('display','none');
+    					$('#dlist').css('display','none');
+    					$('#disclist').css('display','none');
     			    $('#ddetails').load(resultUrl);
     			    $('#ddetails').css('display','block');//showing the list of discussion
     			  }
@@ -320,11 +315,6 @@
 						 $(".error").removeClass(".my-error-class");
 						//alert("clicked cancel");
 					});
-					$('#easyPaginate').easyPaginate({
-				      paginateElement: 'li',
-				      elementsPerPage: 3,
-				      effect: 'climb'
-				});
 				</script>
 			</body>
 			</html>

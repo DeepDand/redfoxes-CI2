@@ -32,7 +32,7 @@ class Discussion extends CI_Controller
 	  //$casurl = "http%3A%2F%2Flocalhost%2Frepository%2F%3Fc%3Dauth%26m%3DdbAuth";
 	  //$casurl = "http://localhost/redfoxes/Discussion/createDiscussion_view";
 		//$casurl = "http%3A%2F%2Fdev.library.marist.edu%2Fredfoxes%2F%3Fc%3DDiscussion%26m%3DcreateDiscussion_view"; //-uncomment for dev
-	$casurl = "http%3A%2F%2Flocalhost%2Fredv1%2F%3Fc%3DDiscussion%26m%3Dmain_view";
+	$casurl = "http%3A%2F%2Flocalhost%2Fredv1%2F%3Fc%3DDiscussion%26m%3DcreateDiscussion_view";
 		if (!$authenticated) {
 					 $_SESSION['LAST_SESSION'] = time(); // update last activity time stamp
 					 $_SESSION['CAS'] = true;
@@ -79,7 +79,7 @@ class Discussion extends CI_Controller
 					 $data['title'] = "Marist Disussion Forums";
 					 $ad = $_GET['ticket'];
 		 			$this->session->set_userdata('ad',$access);
-	 				$this->load->view('main_view',$data);
+	 				$this->load->view('createDiscussion_vieww',$data);
 					 } else {
 						 echo "<h1>UnAuthorized Access</h1>";
 					 }
@@ -107,11 +107,11 @@ class Discussion extends CI_Controller
 		$this->load->view('fail_view');
 	}
 
-	public function main_view(){
+	public function createDiscussion_view(){
 
 				$data['user'] = $_SESSION['user'];
 				$data['title'] = "Marist Disussion Forums";
-				$this->load->view('main_view',$data);
+				$this->load->view('createDiscussion_vieww',$data);
 	}
 	public function discussionList(){
 		$page_data['query'] = $this->Discussion_model->discussion_list();
