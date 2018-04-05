@@ -29,8 +29,8 @@
             foreach ($query->result() as $result) ://$this->input->post($result->d_id, $result->d_title, $result->cwid);?>
             <div>
               <tr>
-                <td><a id="anchorid" href="javascript:fetchList('<?php echo base_url().'Discussion/discussionDetails/'.$result->d_id; ?>')"><?php echo $result->d_title; ?></a></td>
-                <td><?php echo $result->cwid; ?></td>
+                <td><a id="anchorid" href="javascript:fetchList('<?php echo base_url().'Discussion/discussionDetails/'.$result->d_id; ?>')"><?php echo ucfirst($result->d_title); ?></a></td>
+                <td><?php echo ucfirst($result->username); ?></td>
                 <td><?php echo $result->category; ?></td>
                 <td><?php echo $result->age; ?></td>
                 <td class="hidden-xs hidden-sm hidden-md hidden-lg"><input type="hidden" id="d_id" name= "d_id" value ="<?php echo (isset($result->d_id))?$result->d_id:'';?>" required="required" /></td>

@@ -74,12 +74,19 @@ class Discussion extends CI_Controller
 					 $_SESSION['access'] = $access;
 					 $_SESSION['cas_answer'] = $cas_answer;
 					 $data['cwid'] = $_SESSION['user'];
+					 $cwid = $_SESSION['user'];
+					 $userquery = $this->Discussion_model->checkuniqueuser($cwid);
+					 if($userquery){
+						 $data['username'] = $this->Discussion_model->getusername($cwid);
+						 $_SESSION['firstname'] = $data['username'];
+					 } else {
+						 $data['username'] = '';
+					 }
 					 //$data['uname'] = $_GET['username'];
 					 $data['cas_answer'] = $_SESSION['cas_answer'];
 					 $data['title'] = "Marist Disussion Forums";
-					 $ad = $_GET['ticket'];
-		 			$this->session->set_userdata('ad',$access);
-	 				$this->load->view('createDiscussion_vieww',$data);
+					 $this->session->set_userdata('ad',$access);
+	 				 $this->load->view('createDiscussion_vieww',$data);
 					 } else {
 						 echo "<h1>UnAuthorized Access</h1>";
 					 }
@@ -108,8 +115,14 @@ class Discussion extends CI_Controller
 	}
 
 	public function createDiscussion_view(){
-
 				$data['user'] = $_SESSION['user'];
+				$cwid = $_SESSION['user'];
+				$userquery = $this->Discussion_model->checkuniqueuser($cwid);
+				if($userquery){
+					$data['username'] = $this->Discussion_model->getusername($cwid);
+				} else {
+					$data['username'] = '';
+				}
 				$data['title'] = "Marist Disussion Forums";
 				$this->load->view('createDiscussion_vieww',$data);
 	}
@@ -130,7 +143,8 @@ class Discussion extends CI_Controller
 				'ds_title' => $this->input->post('ds_title'),
 				'ds_body' =>  $this->input->post('ds_body'),
 				'category' => $this->input->post('category'),
-				'ds_num' => $this->input->post('ds_num')
+				'ds_num' => $this->input->post('ds_num'),
+				'firstname' => $_SESSION['firstname']
 			);
       $dtitle = $this->input->post('ds_title');
       $dbody = $this->input->post('ds_body');
@@ -167,24 +181,55 @@ class Discussion extends CI_Controller
 	}
 	public function addNewPost(){
 		$data['title'] = "Marist Disussion Forums";
-
-		  // Submitted form data
-		  //$data['cwid']   = $_POST['cwid'];
-			$data['cwid']   = $_SESSION['user'];
-		  $data['p_title']   = $this->input->post('postTitle');
-		  $data['p_body']   = $this->input->post('postBody');
-			$data['d_id']   = $this->input->post('d_id');
-			$did = $this->input->post('d_id');
-			if($data['p_title'] != NULL){
-			if($this->Discussion_model->createPost($data)){
-				$post_data['postquery'] = $this->Discussion_model->fetch_post($did);
-				$post_data['query'] = $this->Discussion_model->fetch_discussion($did);
-				$this->load->view('discussionDetails_view',$post_data);
+	  // Submitted form data
+	  //$data['cwid']   = $_POST['cwid'];
+		$data['cwid']   = $_SESSION['user'];
+	  $data['p_title']   = $this->input->post('postTitle');
+	  $data['p_body']   = $this->input->post('postBody');
+		$data['d_id']   = $this->input->post('d_id');
+		$data['firstname'] = $_SESSION['firstname'];
+		$did = $this->input->post('d_id');
+		if($data['p_title'] != NULL){
+		if($this->Discussion_model->createPost($data)){
+			$post_data['postquery'] = $this->Discussion_model->fetch_post($did);
+			$post_data['query'] = $this->Discussion_model->fetch_discussion($did);
+			$this->load->view('discussionDetails_view',$post_data);
+			} else {
+				$this->load->view('fail_view');
+			}
+		}
+		else {
+			$this->load->view('fail_view');
+		}
+	}
+	public function addEmail(){
+		$data['title'] = "Marist Disussion Forums";
+	  // Submitted form data
+	  //$data['cwid']   = $_POST['cwid'];
+		$data['cwid'] = $_SESSION['user'];
+		$cwid = $_SESSION['user'];
+	  $data['emailid'] = $this->input->post('emailid');
+		$data['firstname'] = $this->input->post('firstname');
+		$data['lastname'] = $this->input->post('lastname');
+	  if($data['emailid'] != NULL){
+			if($this->Discussion_model->addEmailId($data)){
+				$userquery = $this->Discussion_model->checkuniqueuser($cwid);
+				if($userquery){
+					if($_SESSION['firstname']='') {
+						$data['username'] = $this->Discussion_model->getusername($cwid);
+						$_SESSION['firstname'] = $data['username'];
+					} else {
+						$_SESSION['fisrtname'] = 	$this->input->post('firstname');
+					}
+				} else {
+					$data['username'] = '';
+				}
+				$data['title'] = "Marist Disussion Forums";
+				$this->load->view('createDiscussion_vieww',$data);
 				} else {
 					$this->load->view('fail_view');
 				}
-			}
-			else {
+			} else {
 				$this->load->view('fail_view');
 			}
 		}

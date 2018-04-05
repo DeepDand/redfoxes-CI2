@@ -36,7 +36,7 @@
       <?php if($query->result()) {
       foreach ($query->result() as $result) : $this->input->post($result->d_title,$result->cwid,$result->d_id,$result->d_body); //$d_id=$result->d_id;?>
         <h4 class="list-group-item-heading">Title: <?php echo $result->d_title; ?></h4>
-        <p class="list-group-item-text" style="color:gray"><?php echo "Created by ".$result->cwid; ?></p>
+        <p class="list-group-item-text" style="color:gray"><?php echo "Created by ".ucfirst($result->username); ?></p>
         <p><?php echo $result->d_body; ?></p><br />
     <?php endforeach; } else {?>
       </div>
@@ -52,8 +52,9 @@
           foreach ($postquery->result() as $postresult) : $this->input->post($postresult->p_title,$postresult->p_body);?>
             <li class="list-group-item">
               <!--<h4 class="list-group-item-heading">Post title: <//?php echo $postresult->p_title; ?></h4>-->
-              <input type="hidden" id="p_id" value = "<?php echo (isset($postresult->p_id))?$postresult->p_id:'';?>" /><p><?php echo $postresult->p_body; ?></p><br />
-              <p class="list-group-item-text" style="color:gray"><?php echo "Reply from ".$postresult->cwid; ?></p><input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'Discussion/commentView/'.$postresult->p_id; ?>"></input><!--this is to pass urls to specific discussions-->
+              <p class="list-group-item-text" style="color:	#444444"><?php echo "".ucfirst($postresult->username); ?></p><br />
+              <input type="hidden" id="p_id" value = "<?php echo (isset($postresult->p_id))?$postresult->p_id:'';?>" /><p><?php echo $postresult->p_body; ?></p>
+              <p class="list-group-item-text" style="color:gray"><?php echo $postresult->age; ?></p><input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'Discussion/commentView/'.$postresult->p_id; ?>"></input><!--this is to pass urls to specific discussions-->
             </li>
           <?php endforeach;?>
   </div>
@@ -101,7 +102,7 @@
     //$('#postdatatable').DataTable();
     $('#easyPaginate').easyPaginate({
 	      paginateElement: 'li',
-	      elementsPerPage: 5,
+	      elementsPerPage: 1,
 	      effect: 'climb'
 	});
   function fetchComments(myURL){
