@@ -49,7 +49,7 @@
 						</div>
 					</div>
 				<?php } else { ?>
-	      <?php echo "<h3>".$title."</h3>"; echo "<h3>Hello, ".ucfirst($username)."!</h3>"; ?><br />
+	      <?php echo "<h3>".$title."</h3>"; echo "<h3>Hello, <font color='#0040ff	'>".ucfirst($username)."!</font></h3>"; ?><br />
 	      <button type="button" class="btn btn-default btn-lg" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal">Create Discussion</button>
 				<br /><br /><br />
 				<!--<button type="button" class="btn btn-default btn-lg" id="ogd" name="ogd">View on going Discussions</button>
