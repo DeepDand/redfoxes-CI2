@@ -102,7 +102,7 @@
     //$('#postdatatable').DataTable();
     $('#easyPaginate').easyPaginate({
 	      paginateElement: 'li',
-	      elementsPerPage: 1,
+	      elementsPerPage: 5,
 	      effect: 'climb'
 	});
   function fetchComments(myURL){

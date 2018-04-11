@@ -1,1 +1,1 @@
-<h4> This is failview. 404 - you code sucks! </h4>
+<h2>404-Page Not Found!</h2>

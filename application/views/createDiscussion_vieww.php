@@ -198,15 +198,15 @@
  					var ds_num = Math.random() * 1000000;
  					console.log("discussion random number:"+ds_num);
 
- 					if(category.trim() == '' ){
+ 					if(category.trim() == ''){
  							alert('Please enter your CWID.');
  							$('#category').focus();
  							return false;
- 					}else if(ds_title.trim() == '' ){
+ 					}else if(ds_title.trim() == ''){
  							alert('Please enter your message.');
  							$('#ds_title').focus();
  							return false;
- 					}else if(ds_body.trim() == '' ){
+ 					}else if(ds_body.trim() == ''){
  							alert('Please enter your message.');
  							$('#ds_body').focus();
  							return false;
@@ -217,6 +217,7 @@
  									url:'<?php echo base_url(); ?>'+'Discussion/create', //+cwid+'/'+title+'/'+body+'/'+d_id
  									//data:'contactFrmSubmit=1&cwid='+cwid+'&postTitle='+title+'&postBody='+body+'&d_id='+d_id,//,
  									data:{/*'cwid' :cwid,*/ 'category' : category, 'ds_title':ds_title, 'ds_body':ds_body, 'ds_num':ds_num},
+									dataType: 'text',
  									beforeSend: function () {
  											$('.submitBtn').attr("disabled","disabled");
  											$('.modal-body').css('opacity', '.5');
@@ -231,7 +232,6 @@
  											}else{
  													$('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
  											}
-
  											$('.submitBtn').removeAttr("disabled");
  											$('.modal-body').css('opacity', '');
  											$('#newModal').modal('hide');
@@ -248,7 +248,7 @@
 					//var pcwid = $('#pcwid').val();
 					var ptitle = 'default';
 					var pbody = $('#postBody').val();
-					var d_id = $('#di_id ').val();
+					var d_id = $('#di_id').val();
 					if(ptitle.trim() == '' ){
 							alert('Please enter your post title.');
 							//$('#postTitle').focus();
@@ -263,6 +263,7 @@
 									type:'POST',
 									url:'<?php echo base_url() ?>'+'Discussion/addNewPost', //+cwid+'/'+title+'/'+body+'/'+d_id
 									data:{'contactFrmSubmit':'1', 'postTitle' :ptitle, 'postBody':pbody, 'd_id':d_id},
+									dataType: 'text',
 									beforeSend: function () {
 											$('.submitBtn').attr("disabled","disabled");
 											$('.modal-body').css('opacity', '.5');
@@ -293,7 +294,7 @@
 												//document.location.reload();
 												//window.location.assign('<?php //echo base_url()?>'+'Discussion/search_discussion/'+d_id);
 												});
-									},
+									}
 							});
 					}
 			}
