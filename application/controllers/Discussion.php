@@ -31,8 +31,8 @@ class Discussion extends CI_Controller
 			 //URL accessable when the authentication works
 	  //$casurl = "http%3A%2F%2Flocalhost%2Frepository%2F%3Fc%3Dauth%26m%3DdbAuth";
 	  //$casurl = "http://localhost/redfoxes/Discussion/createDiscussion_view";
-		$casurl = "http%3A%2F%2Fdev.library.marist.edu%2Fredv1%2F%3Fc%3DDiscussion%26m%3DcreateDiscussion_view"; //-uncomment for dev
-	//$casurl = "http%3A%2F%2Flocalhost%2Fredv1%2F%3Fc%3DDiscussion%26m%3DcreateDiscussion_view";
+		//$casurl = "http%3A%2F%2Fdev.library.marist.edu%2Fredfoxes%2F%3Fc%3DDiscussion%26m%3DcreateDiscussion_view"; //-uncomment for dev
+	$casurl = "http%3A%2F%2Flocalhost%2Fredfoxes%2F%3Fc%3DDiscussion%26m%3DcreateDiscussion_view";
 		if (!$authenticated) {
 					 $_SESSION['LAST_SESSION'] = time(); // update last activity time stamp
 					 $_SESSION['CAS'] = true;
