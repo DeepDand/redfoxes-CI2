@@ -30,7 +30,6 @@
 </head>
 <body>
   <div class="container fluid">
-    <h2>Discussion body</h2>
     <!--View to show the body of discussions, forums and comments on the discussions -->
     <div class="list-group list-group-item">
       <?php if($query->result()) {
@@ -44,7 +43,7 @@
         <p>No discussion found</p>
       </div><br />
     <?php } ?>
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Reply</button>
+    <button type="button" style="background-color:#333;color:#fff;" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Reply</button>
     <br /><br />
     <div class="list-group" style="margin-left:20px" id="easyPaginate" name="easyPaginate">
           <?php
@@ -70,7 +69,7 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" id="postcancel" name="postcancel" class="close" data-dismiss="modal" onclick="commentclose()">&times;</button>
+            <button type="button" style="background-color:#333;color:#fff;" id="postcancel" name="postcancel" class="close" data-dismiss="modal" onclick="commentclose()">&times;</button>
             <h4 class="modal-title">New Post</h4>
           </div>
           <div class="modal-body">
@@ -87,8 +86,8 @@
                    </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary submitBtn" onclick="submitPostForm()" >Submit</button>
-            <button type="button" class="btn btn-warning" data-dismiss="modal" id="postcancel" name="postcancel" onclick="commentclose()">Close</button>
+            <button style="background-color:#333;color:#fff;" type="button" class="btn btn-primary submitBtn" onclick="submitPostForm()" >Submit</button>
+            <button style="background-color:#333;color:#fff;" type="button" class="btn btn-warning" data-dismiss="modal" id="postcancel" name="postcancel" onclick="commentclose()">Close</button>
           </div>
 
         </div>

@@ -4,14 +4,33 @@
   <title>Marist Discussion Forums</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  .dataTables_filter input {
+    width:100%;
+    position:relative;
+  }
+  .dataTables_filter label {
+    width:100%;
+    font-size: 22px;
+    font-style: normal;
+    position:relative;
+  }
+  .dataTables_length label {
+    width:100%;
+    font-size: 16px;
+    font-style: normal;
+    position:relative;
+  }
+  </style>
 </head>
 <body>
 <?php @session_start();//echo form_open(base_url().'Discussion/discussionDetails','role="form"'); ?>
 <div>
-  <form name="dview" id="dview" method="post" action="<?php echo base_url().'Discussion/discussionDetails/'; ?>">
-    <h2>On-going Discussions</h2>
+  <form name="dview" id="dview" method="post" class="form-group" style="width:100%;" action="<?php echo base_url().'Discussion/discussionDetails/'; ?>">
+    <div id="new-search-area" class="new-search-area container container-fluid" style="width: 100%;"></div><br />
+    <div id="new-drop-area" class="new-drop-area container container-fluid" style="width: 100%;"></div>
       <div>
-        <table id="tabledata"  class="table table-striped table-bordered responsive" cellspacing="0" width="100%">
+        <table id="tabledata" class="table table-striped table-bordered responsive" cellspacing="0" width="100%">
           <thead>
             <tr>
               <th>Discussion Title</th>
@@ -45,7 +64,13 @@
 <!--<?php //echo form_close(); ?>-->
 <script type="text/javascript">
  $('#tabledata').DataTable({
-   "order": [[3, "desc"]]
+   "order": [[3, "desc"]],
+   initComplete : function() {
+     $("#tabledata_filter").detach().appendTo('#new-search-area');
+     $("#tabledata_filter input").addClass('form-control form-control-sm');
+     $("#tabledata_length").detach().appendTo('#new-drop-area');
+   }
+
  });
   function fetchList(myURL){
     console.log(resultUrl);

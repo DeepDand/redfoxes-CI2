@@ -35,21 +35,22 @@
   </head>
   <body>
 		<div id="navi" align="right" class="container fluid">
-			<br /><br /><button id="home" class="btn btn-primary"><span class="glyphicon glyphicon-home"></span> Home</button>
-			<a href="https://login.marist.edu/cas/logout"><button id="logout" type="reset" class="btn btn-logout"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a>
+			<br /><br /><button id="home" class="btn btn-dark" style="background-color:#333;color:#fff;"><span class="glyphicon glyphicon-home"></span> Home</button>
+			<a href="https://login.marist.edu/cas/logout"><button id="logout" type="reset" class="btn btn-logout" style="background-color:#333;color:#fff;"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a>
 		</div>
 		<div class="container fluid" id="cview">
-			<div id="main_page" class="form-group">
+
 				<?php if($username == ''){ ?>
 					<div class="form-group" id="mailform" class="mailform">
 						<div>
 							<label for="emailid">Please Enter your Marist Email ID</label>
 							<input type="text" name="emailid" class="form-control" id="emailid" value="<?php echo set_value('emailid'); ?>" /><br />
-							<center><button type="submit" class="btn btn-success" onclick="submitEmailForm()"><?php echo $this->lang->line('common_form_elements_go');?></button></center>
+							<center><button style="background-color:#333;color:#fff;" type="submit" class="btn btn-dark" onclick="submitEmailForm()"><?php echo $this->lang->line('common_form_elements_go');?></button></center>
 						</div>
 					</div>
 				<?php } else { ?>
-	      <?php echo "<h3>".$title."</h3>"; echo "<h3>Hello, <font color='#0040ff	'>".ucfirst($username)."!</font></h3>"; ?><br />
+				<div id="main_page" class="form-group"><br />
+	      <?php echo "<p class='pull-left' style='font-size: 22px;'>".$title."</p>"; echo "<p class='pull-right' style='font-size: 22px;'>Hello, <font color='#0040ff'>".ucfirst($username)."!</font></p>"; ?><br /><br /><br />
 	      <button type="button" class="btn btn-default btn-lg" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal">Create Discussion</button>
 				<br /><br /><br />
 				<!--<button type="button" class="btn btn-default btn-lg" id="ogd" name="ogd">View on going Discussions</button>
@@ -59,8 +60,8 @@
 				<div id="ddetails"></div>
 				<div id="ddetails1"></div>
 				<div id="casdata" class="container fluid"></div>
-				<div id="disclist" name="disclist" class="col-md-8"></div>
-				<div id="dlist" class="col-md-9 fluid"></div>
+				<div id="disclist" name="disclist" style="align:center"></div>
+				<div id="dlist" style="float:center" class="col-md-9 fluid"></div>
 				<div id="newDisc" class="form-horizontal"></div>
 				<!-- Modal for adding Post -->
 		    <div class="modal fade" id="newModal" name="newModal" role="dialog" >
@@ -104,8 +105,8 @@
 								    </div>
 									</div>
 									<div class="modal-footer">
-				            <button type="submit" class="btn btn-success" onclick="submitDiscussionForm()"><?php echo $this->lang->line('common_form_elements_go');?></button>
-				            <button type="button" class="btn btn-warning" data-dismiss="modal" id="cancel" name="cancel">Close</button>
+				            <button style="background-color:#333;color:#fff;" type="submit" class="btn btn-success" onclick="submitDiscussionForm()"><?php echo $this->lang->line('common_form_elements_go');?></button>
+				            <button style="background-color:#333;color:#fff;" type="button" class="btn btn-warning" data-dismiss="modal" id="cancel" name="cancel">Close</button>
 				          </div>
 								</form>
 								<!--<input type="text" name="ds_num" class="form-control" id="ds_num" value="<?php //echo mt_rand(); ?>" />-->

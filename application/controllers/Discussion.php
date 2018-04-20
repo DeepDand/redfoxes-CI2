@@ -18,7 +18,7 @@ class Discussion extends CI_Controller
 	}
 	public function index()
 	{
-		$data['title'] = "Marist Disussion Forums";
+		$data['title'] = "Redfoxes Forumss";
 		//$this->load->view('createDiscussion_view',$data);
 		$date = date("m/d/Y");
 	  if (isset($_SESSION['LAST_SESSION']) && (time() - $_SESSION['LAST_SESSION'] > 900)) {
@@ -84,7 +84,7 @@ class Discussion extends CI_Controller
 					 }
 					 //$data['uname'] = $_GET['username'];
 					 $data['cas_answer'] = $_SESSION['cas_answer'];
-					 $data['title'] = "Marist Disussion Forums";
+					 $data['title'] = "Redfoxes Forums";
 					 $this->session->set_userdata('ad',$access);
 	 				 $this->load->view('createDiscussion_vieww',$data);
 					 } else {
@@ -123,7 +123,7 @@ class Discussion extends CI_Controller
 				} else {
 					$data['username'] = '';
 				}
-				$data['title'] = "Marist Disussion Forums";
+				$data['title'] = "Redfoxes Forumss";
 				$this->load->view('createDiscussion_vieww',$data);
 	}
 	public function discussionList(){
@@ -135,7 +135,7 @@ class Discussion extends CI_Controller
     $this->form_validation->set_rules('ds_title', $this->lang->line('discussion_ds_title'), 'required|min_length[1]|max_length[50]');
     $this->form_validation->set_rules('ds_body', $this->lang->line('discussion_ds_body'), 'required|min_length[1]|max_length[500]');
 		if ($this->form_validation->run() == FALSE) {
-			$data['title'] = "Marist Disussion Forums";
+			$data['title'] = "Redfoxes Forums";
 			$this->load->view('newDiscussion_view',$data);//add alert and bring user to same page to fill the form again.
 		} else {
 			$data = array(
@@ -180,7 +180,7 @@ class Discussion extends CI_Controller
 			}
 	}
 	public function addNewPost(){
-		$data['title'] = "Marist Disussion Forums";
+		$data['title'] = "Redfoxes Forums";
 	  // Submitted form data
 	  //$data['cwid']   = $_POST['cwid'];
 		$data['cwid']   = $_SESSION['user'];
@@ -203,7 +203,7 @@ class Discussion extends CI_Controller
 		}
 	}
 	public function addEmail(){
-		$data['title'] = "Marist Disussion Forums";
+		$data['title'] = "Redfoxes Forums";
 	  // Submitted form data
 	  //$data['cwid']   = $_POST['cwid'];
 		$data['cwid'] = $_SESSION['user'];
@@ -224,7 +224,7 @@ class Discussion extends CI_Controller
 				} else {
 					$data['username'] = '';
 				}
-				$data['title'] = "Marist Disussion Forums";
+				$data['title'] = "Redfoxes Forums";
 				$this->load->view('createDiscussion_vieww',$data);
 				} else {
 					$this->load->view('fail_view');
@@ -234,7 +234,7 @@ class Discussion extends CI_Controller
 			}
 		}
 		public function search_discussion(){
-			$data['title'] = "Marist Disussion Forums";
+			$data['title'] = "Redfoxes Forums";
 			$ds_num = $this->uri->segment(3);
 			$did = $this->Discussion_model->find_discussion($ds_num);
 			if($did != '') {
