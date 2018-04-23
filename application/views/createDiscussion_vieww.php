@@ -8,7 +8,6 @@
 		<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
 		<!-- jQuery -->
 		<!-- BS JavaScript -->
-
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="<?php echo base_url();?>/js/jquery.easyPaginate.js"></script>
@@ -31,10 +30,11 @@
 		.foot a:hover {
 			color: #B31B1B;
 		}
+		
 		</style>
   </head>
   <body>
-		<div id="navi" align="right" class="container fluid">
+		<div id="navi" align="right" class="container fluid" style="margin-bottom: 30px;">
 			<br /><br /><button id="home" class="btn btn-dark" style="background-color:#333;color:#fff;"><span class="glyphicon glyphicon-home"></span> Home</button>
 			<a href="https://login.marist.edu/cas/logout"><button id="logout" type="reset" class="btn btn-logout" style="background-color:#333;color:#fff;"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a>
 		</div>
@@ -49,10 +49,9 @@
 						</div>
 					</div>
 				<?php } else { ?>
-				<div id="main_page" class="form-group"><br />
-	      <?php echo "<p class='pull-left' style='font-size: 22px;'>".$title."</p>"; echo "<p class='pull-right' style='font-size: 22px;'>Hello, <font color='#0040ff'>".ucfirst($username)."!</font></p>"; ?><br /><br /><br />
-	      <button type="button" class="btn btn-default btn-lg" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal">Create Discussion</button>
-				<br /><br /><br />
+				<div id="main_page" class="form-group">
+	      <!--?php echo "<p class='pull-left' style='font-size: 22px;'>".$title."</p>"; echo "<p class='pull-right' style='font-size: 22px;'>Hello, <font color='#0040ff'>".ucfirst($username)."!</font></p>"; ?><br /><br /><br /-->
+	      <button type="button" class="btn btn-default btn-sm" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:14px; margin-bottom:10px;">Start a new Discussion</button>
 				<!--<button type="button" class="btn btn-default btn-lg" id="ogd" name="ogd">View on going Discussions</button>
 				<br /><br />-->
 				<p><//?php echo $cwid; ?></p>
@@ -60,7 +59,7 @@
 				<div id="ddetails"></div>
 				<div id="ddetails1"></div>
 				<div id="casdata" class="container fluid"></div>
-				<div id="disclist" name="disclist" style="align:center"></div>
+				<div id="disclist" name="disclist"></div>
 				<div id="dlist" style="float:center" class="col-md-9 fluid"></div>
 				<div id="newDisc" class="form-horizontal"></div>
 				<!-- Modal for adding Post -->
@@ -72,7 +71,7 @@
 
 		          <div class="modal-header">
 		            <button type="button" class="close" data-dismiss="modal">&times;</button>
-		            <h4 class="modal-title col-md-9">Create a new Discussion</h4>
+		            <h4 class="modal-title col-md-9">Start a new Discussion</h4>
 		          </div>
 							<!--<?php //$attributes = array('name' => 'newd','id'=>'newd');echo form_open(base_url().'Discussion/create',$attributes) ; ?>-->
 
@@ -105,8 +104,8 @@
 								    </div>
 									</div>
 									<div class="modal-footer">
-				            <button style="background-color:#333;color:#fff;" type="submit" class="btn btn-success" onclick="submitDiscussionForm()"><?php echo $this->lang->line('common_form_elements_go');?></button>
-				            <button style="background-color:#333;color:#fff;" type="button" class="btn btn-warning" data-dismiss="modal" id="cancel" name="cancel">Close</button>
+				            <button style="background-color:#333;color:#fff;" type="submit" class="btn btn-dark" onclick="submitDiscussionForm()"><?php echo $this->lang->line('common_form_elements_go');?></button>
+				            <button style="background-color:#333;color:#fff;" type="button" class="btn btn-dark" data-dismiss="modal" id="cancel" name="cancel">Close</button>
 				          </div>
 								</form>
 								<!--<input type="text" name="ds_num" class="form-control" id="ds_num" value="<?php //echo mt_rand(); ?>" />-->
@@ -123,7 +122,7 @@
 	        <p class = "foot">
 	            James A. Cannavino Library, 3399 North Road, Poughkeepsie, NY 12601; 845.575.3199
 	            <br />
-	            &#169; Copyright 2007-2016 Marist College. All Rights Reserved.
+	            &#169; Copyright 2007-2018 Marist College. All Rights Reserved.
 			<a href="http://www.marist.edu/disclaimers.html" target="_blank" >Disclaimers</a> | <a href="http://www.marist.edu/privacy.html" target="_blank" >Privacy Policy</a>
 	        </p>
 	    </div>

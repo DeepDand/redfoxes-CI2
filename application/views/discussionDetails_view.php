@@ -18,7 +18,7 @@
     text-decoration: none;
   }
   .easyPaginateNav a.current {
-    font-weight:bold;background-color: #4CAF50;color: #000;border-radius: 8px;text-decoration: none;
+    font-weight:bold;background-color: #fff;color: #000;border-radius: 8px;text-decoration: none;
   }
   .easyPaginateNav a.active {
     background-color: #4CAF50;color: #000;
@@ -36,20 +36,20 @@
       foreach ($query->result() as $result) : $this->input->post($result->d_title,$result->cwid,$result->d_id,$result->d_body); //$d_id=$result->d_id;?>
         <h4 class="list-group-item-heading">Title: <?php echo $result->d_title; ?></h4>
         <p class="list-group-item-text" style="color:gray"><?php echo "Created by ".ucfirst($result->username); ?></p>
-        <p><?php echo $result->d_body; ?></p><br />
+        <p><?php echo $result->d_body; ?></p>
     <?php endforeach; } else {?>
       </div>
       <div class="list-group list-group-item">
         <p>No discussion found</p>
-      </div><br />
+      </div>
     <?php } ?>
-    <button type="button" style="background-color:#333;color:#fff;" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Reply</button>
+    <button type="button" style="background-color:#333;color:#fff;" class="btn btn-dark" data-toggle="modal" data-target="#myModal">Reply</button>
     <br /><br />
     <div class="list-group" style="margin-left:20px" id="easyPaginate" name="easyPaginate">
           <?php
           if($postquery) {
           foreach ($postquery->result() as $postresult) : $this->input->post($postresult->p_title,$postresult->p_body);?>
-            <li class="list-group-item">
+            <li class="list-group-item" style="margin-bottom: 10px;">
               <!--<h4 class="list-group-item-heading">Post title: <//?php echo $postresult->p_title; ?></h4>-->
               <p class="list-group-item-text" style="color:	#444444"><?php echo "".ucfirst($postresult->username); ?></p><br />
               <input type="hidden" id="p_id" value = "<?php echo (isset($postresult->p_id))?$postresult->p_id:'';?>" /><p><?php echo $postresult->p_body; ?></p>

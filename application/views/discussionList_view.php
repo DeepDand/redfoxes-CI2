@@ -29,9 +29,9 @@
   <form name="dview" id="dview" method="post" class="form-group" style="width:100%;" action="<?php echo base_url().'Discussion/discussionDetails/'; ?>">
     <div id="new-search-area" class="new-search-area container container-fluid" style="width: 100%;"></div><br />
     <div id="new-drop-area" class="new-drop-area container container-fluid" style="width: 100%;"></div>
-      <div>
-        <table id="tabledata" class="table table-striped table-bordered responsive" cellspacing="0" width="100%">
-          <thead>
+      <!--div-->
+        <table id="tabledata" class="table table-responsive" cellspacing="0" width="100%">
+          <thead >
             <tr>
               <th>Discussion Title</th>
               <th>Created By</th>
@@ -42,7 +42,7 @@
             </tr>
           </thead>
 
-        </div>
+        <!--/div-->
         <tbody>
           <?php
             foreach ($query->result() as $result) ://$this->input->post($result->d_id, $result->d_title, $result->cwid);?>
