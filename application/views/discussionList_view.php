@@ -30,7 +30,7 @@
     <div id="new-search-area" class="new-search-area container container-fluid" style="width: 100%;"></div><br />
     <div id="new-drop-area" class="new-drop-area container container-fluid" style="width: 100%;"></div>
       <!--div-->
-        <table id="tabledata" class="table table-responsive" cellspacing="0" width="100%">
+        <table id="tabledata" class="table table-responsive" style="border-bottom:1px solid" cellspacing="0" width="100%">
           <thead >
             <tr>
               <th>Discussion Title</th>
