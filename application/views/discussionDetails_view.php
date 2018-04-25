@@ -49,7 +49,7 @@
           <?php
           if($postquery) {
           foreach ($postquery->result() as $postresult) : $this->input->post($postresult->p_title,$postresult->p_body);?>
-            <li class="list-group-item" style="margin-bottom: 10px;">
+            <li class="list-group-item" style="margin-bottom: 7px;">
               <!--<h4 class="list-group-item-heading">Post title: <//?php echo $postresult->p_title; ?></h4>-->
               <p class="list-group-item-text" style="color:	#444444"><?php echo "".ucfirst($postresult->username); ?></p><br />
               <input type="hidden" id="p_id" value = "<?php echo (isset($postresult->p_id))?$postresult->p_id:'';?>" /><p><?php echo $postresult->p_body; ?></p>
