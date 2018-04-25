@@ -18,7 +18,7 @@ class Discussion extends CI_Controller
 	}
 	public function index()
 	{
-		$data['title'] = "Redfoxes Forumss";
+		$data['title'] = "Redfoxes Forums";
 		//$this->load->view('createDiscussion_view',$data);
 		$date = date("m/d/Y");
 	  if (isset($_SESSION['LAST_SESSION']) && (time() - $_SESSION['LAST_SESSION'] > 900)) {

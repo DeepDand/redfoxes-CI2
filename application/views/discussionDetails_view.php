@@ -43,7 +43,7 @@
         <p>No discussion found</p>
       </div>
     <?php } ?>
-    <button type="button" style="background-color:#333;color:#fff;" class="btn btn-dark" data-toggle="modal" data-target="#myModal">Reply</button>
+    <button type="button" style="color:#fff;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Reply</button>
     <br /><br />
     <div class="list-group" style="margin-left:20px" id="easyPaginate" name="easyPaginate">
           <?php
@@ -69,7 +69,7 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" style="background-color:#333;color:#fff;" id="postcancel" name="postcancel" class="close" data-dismiss="modal" onclick="commentclose()">&times;</button>
+            <button type="button" style="background:#000000;color:#fff;" id="postcancel" name="postcancel" class="close" data-dismiss="modal" onclick="commentclose()">&times;</button>
             <h4 class="modal-title">New Post</h4>
           </div>
           <div class="modal-body">
@@ -80,14 +80,14 @@
                    </div>-->
                    <div class="form-group">
                        <label for="postBody">Post Body</label>
-                       <textarea class="form-control" id="postBody" placeholder="Enter your message"></textarea>
+                       <textarea class="form-control" rows="5" id="postBody" placeholder="Enter your message"></textarea>
                        <input type="hidden" id="di_id" value = "<?php echo (isset($result->d_id))?$result->d_id:'';?>" />
                    </div>
                    </form>
           </div>
           <div class="modal-footer">
-            <button style="background-color:#333;color:#fff;" type="button" class="btn btn-primary submitBtn" onclick="submitPostForm()" >Submit</button>
-            <button style="background-color:#333;color:#fff;" type="button" class="btn btn-warning" data-dismiss="modal" id="postcancel" name="postcancel" onclick="commentclose()">Close</button>
+            <button style="color:#fff;" type="button" class="btn btn-primary submitBtn" onclick="submitPostForm()" >Submit</button>
+            <button style="color:#fff;" type="button" class="btn btn-primary" data-dismiss="modal" id="postcancel" name="postcancel" onclick="commentclose()">Close</button>
           </div>
 
         </div>

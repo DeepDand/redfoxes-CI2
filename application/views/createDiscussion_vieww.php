@@ -30,13 +30,16 @@
 		.foot a:hover {
 			color: #B31B1B;
 		}
-		
+
 		</style>
   </head>
   <body>
-		<div id="navi" align="right" class="container fluid" style="margin-bottom: 30px;">
-			<br /><br /><button id="home" class="btn btn-dark" style="background-color:#333;color:#fff;"><span class="glyphicon glyphicon-home"></span> Home</button>
-			<a href="https://login.marist.edu/cas/logout"><button id="logout" type="reset" class="btn btn-logout" style="background-color:#333;color:#fff;"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a>
+		<div id="navi"  class="container fluid" style="margin-bottom: 30px;">
+			<br /><br /><button type="button" class="btn btn-primary" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:0px; margin-bottom:0px;">Start a new Discussion</button>
+
+			<!--<button type="button" class="btn btn-primary" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:0px; margin-bottom:0px;">Start a new Discussion</button>-->
+			<a href="https://login.marist.edu/cas/logout"><button style="float: right;margin-left:14px;" id="logout" type="reset" class="btn btn-primary" style="color:#fff;"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a>
+			<button style="float: right;margin-left:14px;" id="home" class="btn btn-primary" style="color:#fff;"><span class="glyphicon glyphicon-home"></span> Home</button>
 		</div>
 		<div class="container fluid" id="cview">
 
@@ -45,15 +48,13 @@
 						<div>
 							<label for="emailid">Please Enter your Marist Email ID</label>
 							<input type="text" name="emailid" class="form-control" id="emailid" value="<?php echo set_value('emailid'); ?>" /><br />
-							<center><button style="background-color:#333;color:#fff;" type="submit" class="btn btn-dark" onclick="submitEmailForm()"><?php echo $this->lang->line('common_form_elements_go');?></button></center>
+							<button style="color:#fff;" type="submit" class="btn btn-primary" onclick="submitEmailForm()"><?php echo $this->lang->line('common_form_elements_go');?></button>
 						</div>
 					</div>
 				<?php } else { ?>
 				<div id="main_page" class="form-group">
 	      <!--?php echo "<p class='pull-left' style='font-size: 22px;'>".$title."</p>"; echo "<p class='pull-right' style='font-size: 22px;'>Hello, <font color='#0040ff'>".ucfirst($username)."!</font></p>"; ?><br /><br /><br /-->
-	      <button type="button" class="btn btn-default btn-sm" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:14px; margin-bottom:10px;">Start a new Discussion</button>
-				<!--<button type="button" class="btn btn-default btn-lg" id="ogd" name="ogd">View on going Discussions</button>
-				<br /><br />-->
+	  <!--    <button type="button" class="btn btn-default btn-sm" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:14px; margin-bottom:10px;">Start a new Discussion</button>-->
 				<p><//?php echo $cwid; ?></p>
 
 				<div id="ddetails"></div>
@@ -100,7 +101,7 @@
 									<div class="form-group">
 								    <div>
 								      <label for="ds_body"><?php echo $this->lang->line('discussion_ds_body');?></label>
-								      <textarea class="form-control" rows="3" name="ds_body" id="ds_body" value="<?php echo set_value('ds_body'); ?>" ></textarea>
+								      <textarea class="form-control" rows="5" name="ds_body" id="ds_body" value="<?php echo set_value('ds_body'); ?>" ></textarea>
 								    </div>
 									</div>
 									<div class="modal-footer">
