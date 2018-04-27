@@ -1,5 +1,5 @@
 <?php
-class Discussion extends CI_Controller
+class discussion extends CI_Controller
 {
 
 	private $current_line;
@@ -11,10 +11,10 @@ class Discussion extends CI_Controller
 		if(!isset($_SESSION))
     {
         session_start();
-				//$_SESSION['id'] = session_id();
+				$_SESSION['id'] = session_id();
     }
 		$this->lang->load('en_admin_lang');
-		$this->load->model('Discussion_model');
+		$this->load->model('discussion_model');
 	}
 	public function index()
 	{
@@ -30,9 +30,9 @@ class Discussion extends CI_Controller
 		$_SESSION['id'] = session_id();
 			 //URL accessable when the authentication works
 	  //$casurl = "http%3A%2F%2Flocalhost%2Frepository%2F%3Fc%3Dauth%26m%3DdbAuth";
-	  //$casurl = "http://localhost/redfoxes/Discussion/createDiscussion_view";
+	  //$casurl = "http://localhost/redfoxes/discussion/createDiscussion_view";
 		//$casurl = "http%3A%2F%2Fdev.library.marist.edu%2Fredfoxes%2F%3Fc%3DDiscussion%26m%3DcreateDiscussion_view"; //-uncomment for dev
-	$casurl = "http%3A%2F%2Flocalhost%2Fredfoxes%2F%3Fc%3DDiscussion%26m%3DcreateDiscussion_view";
+	$casurl = "http%3A%2F%2Flocalhost%2Fredfoxes%2F%3Fc%3Ddiscussion%26m%3DcreateDiscussion_view";
 		if (!$authenticated) {
 					 $_SESSION['LAST_SESSION'] = time(); // update last activity time stamp
 					 $_SESSION['CAS'] = true;
@@ -75,9 +75,9 @@ class Discussion extends CI_Controller
 					 $_SESSION['cas_answer'] = $cas_answer;
 					 $data['cwid'] = $_SESSION['user'];
 					 $cwid = $_SESSION['user'];
-					 $userquery = $this->Discussion_model->checkuniqueuser($cwid);
+					 $userquery = $this->discussion_model->checkuniqueuser($cwid);
 					 if($userquery){
-						 $data['username'] = $this->Discussion_model->getusername($cwid);
+						 $data['username'] = $this->discussion_model->getusername($cwid);
 						 $_SESSION['firstname'] = $data['username'];
 					 } else {
 						 $data['username'] = '';
@@ -117,9 +117,9 @@ class Discussion extends CI_Controller
 	public function createDiscussion_view(){
 				$data['user'] = $_SESSION['user'];
 				$cwid = $_SESSION['user'];
-				$userquery = $this->Discussion_model->checkuniqueuser($cwid);
+				$userquery = $this->discussion_model->checkuniqueuser($cwid);
 				if($userquery){
-					$data['username'] = $this->Discussion_model->getusername($cwid);
+					$data['username'] = $this->discussion_model->getusername($cwid);
 				} else {
 					$data['username'] = '';
 				}
@@ -127,7 +127,7 @@ class Discussion extends CI_Controller
 				$this->load->view('createDiscussion_vieww',$data);
 	}
 	public function discussionList(){
-		$page_data['query'] = $this->Discussion_model->discussion_list();
+		$page_data['query'] = $this->discussion_model->discussion_list();
 		$this->load->view('discussionList_view',$page_data);
 	}
 	public function create() {
@@ -149,12 +149,12 @@ class Discussion extends CI_Controller
       $dtitle = $this->input->post('ds_title');
       $dbody = $this->input->post('ds_body');
 
-			$flag = $this->Discussion_model->create($data);
+			$flag = $this->discussion_model->create($data);
 
 			if ($flag) {
 				return 1;
-				/*$did = $this->Discussion_model->find_discussion($dtitle,$dbody);
-				$discussion_data['query'] = $this->Discussion_model->fetch_discussion($did);
+				/*$did = $this->discussion_model->find_discussion($dtitle,$dbody);
+				$discussion_data['query'] = $this->discussion_model->fetch_discussion($did);
 				$this->load->view('discussionDetails_view',$discussion_data);*/
 				//redirect(base_url()); //need to redirected to the list of discussions __******
 			} else {
@@ -171,8 +171,8 @@ class Discussion extends CI_Controller
 			$pid = array();
 			//fetch discussions from Discussion IDs
 			if($did != '') {
-				$discussion_data['query'] = $this->Discussion_model->fetch_discussion($did);
-				$discussion_data['postquery'] = $this->Discussion_model->fetch_post($did);//,$config['per_page'],$page);
+				$discussion_data['query'] = $this->discussion_model->fetch_discussion($did);
+				$discussion_data['postquery'] = $this->discussion_model->fetch_post($did);//,$config['per_page'],$page);
 				$this->load->view('discussionDetails_view',$discussion_data);
 			}
 			else {
@@ -190,9 +190,9 @@ class Discussion extends CI_Controller
 		$data['firstname'] = $_SESSION['firstname'];
 		$did = $this->input->post('d_id');
 		if($data['p_title'] != NULL){
-		if($this->Discussion_model->createPost($data)){
-			$post_data['postquery'] = $this->Discussion_model->fetch_post($did);
-			$post_data['query'] = $this->Discussion_model->fetch_discussion($did);
+		if($this->discussion_model->createPost($data)){
+			$post_data['postquery'] = $this->discussion_model->fetch_post($did);
+			$post_data['query'] = $this->discussion_model->fetch_discussion($did);
 			$this->load->view('discussionDetails_view',$post_data);
 			} else {
 				$this->load->view('fail_view');
@@ -212,11 +212,11 @@ class Discussion extends CI_Controller
 		$data['firstname'] = $this->input->post('firstname');
 		$data['lastname'] = $this->input->post('lastname');
 	  if($data['emailid'] != NULL){
-			if($this->Discussion_model->addEmailId($data)){
-				$userquery = $this->Discussion_model->checkuniqueuser($cwid);
+			if($this->discussion_model->addEmailId($data)){
+				$userquery = $this->discussion_model->checkuniqueuser($cwid);
 				if($userquery){
 					if($_SESSION['firstname']='') {
-						$data['username'] = $this->Discussion_model->getusername($cwid);
+						$data['username'] = $this->discussion_model->getusername($cwid);
 						$_SESSION['firstname'] = $data['username'];
 					} else {
 						$_SESSION['fisrtname'] = 	$this->input->post('firstname');
@@ -236,10 +236,10 @@ class Discussion extends CI_Controller
 		public function search_discussion(){
 			$data['title'] = "Redfoxes Forums";
 			$ds_num = $this->uri->segment(3);
-			$did = $this->Discussion_model->find_discussion($ds_num);
+			$did = $this->discussion_model->find_discussion($ds_num);
 			if($did != '') {
-				$discussion_data['query'] = $this->Discussion_model->fetch_discussion($did);
-				$discussion_data['postquery'] = $this->Discussion_model->fetch_post($did);
+				$discussion_data['query'] = $this->discussion_model->fetch_discussion($did);
+				$discussion_data['postquery'] = $this->discussion_model->fetch_post($did);
 				$this->load->view('discussionDetails_view',$discussion_data);
 			} else {
 				$this->load->view('fail_view');

@@ -30,16 +30,21 @@
 		.foot a:hover {
 			color: #B31B1B;
 		}
+		body {
+			font-family: Algerian;
+		}
 
 		</style>
   </head>
-  <body>
+  <body style="overflow:scroll;">
 		<div id="navi"  class="container fluid" style="margin-bottom: 30px;">
-			<br /><br /><button type="button" class="btn btn-primary" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:0px; margin-bottom:0px;">Start a new Discussion</button>
+			<br /><br />
+
+			<button type="button" class="btn btn-primary" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:14px; margin-bottom:10px;">Start a new Discussion</button>
 
 			<!--<button type="button" class="btn btn-primary" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:0px; margin-bottom:0px;">Start a new Discussion</button>-->
 			<a href="https://login.marist.edu/cas/logout"><button style="float: right;margin-left:14px;" id="logout" type="reset" class="btn btn-primary" style="color:#fff;"><span class="glyphicon glyphicon-log-out"></span> Logout</button></a>
-			<button style="float: right;margin-left:14px;" id="home" class="btn btn-primary" style="color:#fff;"><span class="glyphicon glyphicon-home"></span> Home</button>
+			<button style="float: right;" id="home" class="btn btn-primary" style="color:#fff;"><span class="glyphicon glyphicon-home"></span> Home</button>
 		</div>
 		<div class="container fluid" id="cview">
 
@@ -53,9 +58,9 @@
 					</div>
 				<?php } else { ?>
 				<div id="main_page" class="form-group">
-	      <!--?php echo "<p class='pull-left' style='font-size: 22px;'>".$title."</p>"; echo "<p class='pull-right' style='font-size: 22px;'>Hello, <font color='#0040ff'>".ucfirst($username)."!</font></p>"; ?><br /><br /><br /-->
-	  <!--    <button type="button" class="btn btn-default btn-sm" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:14px; margin-bottom:10px;">Start a new Discussion</button>-->
-				<p><//?php echo $cwid; ?></p>
+	      <!--?php echo "<p class='pull-left' style='font-size: 22px;'>".$title."</p>"; echo "<p class='pull-right' style='font-size: 22px;'>Hello, <font color='#0040ff'>".ucfirst($username)."!</font></p>"; ?><br /><br /><br />
+	      <button type="button" class="btn btn-primary" id="newDiscussion" name="newDiscussion" data-toggle="modal" data-target="#newModal" style="margin-left:14px; margin-bottom:10px;">Start a new Discussion</button>-->
+				<p><?php //echo $username; ?></p>
 
 				<div id="ddetails"></div>
 				<div id="ddetails1"></div>
@@ -130,10 +135,10 @@
 			<script type="text/javascript" class="init">
 
 			$(document).ready(function(){
-				$("#navi").click(function(){
+				$("#home").click(function(){
 					window.location.href = '<?php echo base_url() ?>';
 				});
-				var resultUrll = "<?php echo base_url()?>"+'Discussion/discussionList';
+				var resultUrll = "<?php echo base_url()?>"+'discussion/discussionList';
 				$('#disclist').load(resultUrll);
 				//$("#casdata").html('<object data="http://ldap.geminiodyssey.org/casattributes.php" />');
 				//$("#casdata").load('http://ldap.geminiodyssey.org/casattributes.php li');
@@ -215,7 +220,7 @@
  						//alert("in else");
  							$.ajax({
  									type:'POST',
- 									url:'<?php echo base_url(); ?>'+'Discussion/create', //+cwid+'/'+title+'/'+body+'/'+d_id
+ 									url:'<?php echo base_url(); ?>'+'discussion/create', //+cwid+'/'+title+'/'+body+'/'+d_id
  									//data:'contactFrmSubmit=1&cwid='+cwid+'&postTitle='+title+'&postBody='+body+'&d_id='+d_id,//,
  									data:{/*'cwid' :cwid,*/ 'category' : category, 'ds_title':ds_title, 'ds_body':ds_body, 'ds_num':ds_num},
 									dataType: 'text',
@@ -237,7 +242,7 @@
  											$('.modal-body').css('opacity', '');
  											$('#newModal').modal('hide');
  											$('.modal-backdrop').remove();
- 											fetchDiscussion('<?php echo base_url()?>'+'Discussion/search_discussion/'+ds_num);
+ 											fetchDiscussion('<?php echo base_url()?>'+'discussion/search_discussion/'+ds_num);
  										//	$(document).on('hidden.bs.modal','#newModal', function () {
  								//});
  							}
@@ -262,7 +267,7 @@
 						//console.log("finally in else");
 							$.ajax({
 									type:'POST',
-									url:'<?php echo base_url() ?>'+'Discussion/addNewPost', //+cwid+'/'+title+'/'+body+'/'+d_id
+									url:'<?php echo base_url() ?>'+'discussion/addNewPost', //+cwid+'/'+title+'/'+body+'/'+d_id
 									data:{'contactFrmSubmit':'1', 'postTitle' :ptitle, 'postBody':pbody, 'd_id':d_id},
 									dataType: 'text',
 									beforeSend: function () {
@@ -276,7 +281,7 @@
 											}else{
 													$('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
 											}
-											var resultUrl = '<?php echo base_url()?>'+'Discussion/search_discussion/'+d_id;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
+											var resultUrl = '<?php echo base_url()?>'+'discussion/search_discussion/'+d_id;//document.getElementById('getURL').value; //"<?php //echo base_url().'Discussion/discussionDetails/'; ?>"+getdid;
 									    console.log(resultUrl);
 											//$('#ddetails').empty();
 											$('#dlist').css('display','none');
@@ -373,7 +378,7 @@
 					} else {
 							$.ajax({
 									type: 'POST',
-									url: '<?php echo base_url(); ?>'+'Discussion/addEmail',
+									url: '<?php echo base_url(); ?>'+'discussion/addEmail',
 									data: {'emailid':emailid, 'firstname':firstname,'lastname':lastname},
 									dataType: 'text',
 									beforeSend: function () {

@@ -1,5 +1,5 @@
 <?php
-class Discussion_model extends CI_Model
+class discussion_model extends CI_Model
 {
 
 	function __construct()
@@ -169,7 +169,9 @@ class Discussion_model extends CI_Model
 		$this->db->where($condition);
 		$usernamequery = $this->db->get();
 		$ret = $usernamequery->row();
-		$val = 	$ret->firstname;
+		$fname = 	$ret->firstname; //firstname
+		$lname = $ret->lastname; //lastname
+		$val = $fname." ".$lname; //fullname
 		//$uname = $usernamequery->result();
 		if($usernamequery->num_rows() > 0){
 			return $val;

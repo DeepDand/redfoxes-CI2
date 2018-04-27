@@ -29,7 +29,7 @@
 </style>
 </head>
 <body>
-  <div class="container fluid">
+  <div class="container fluid" style="">
     <!--View to show the body of discussions, forums and comments on the discussions -->
     <div class="list-group list-group-item">
       <?php if($query->result()) {
@@ -51,9 +51,9 @@
           foreach ($postquery->result() as $postresult) : $this->input->post($postresult->p_title,$postresult->p_body);?>
             <li class="list-group-item" style="margin-bottom: 7px;">
               <!--<h4 class="list-group-item-heading">Post title: <//?php echo $postresult->p_title; ?></h4>-->
-              <p class="list-group-item-text" style="color:	#444444"><?php echo "".ucfirst($postresult->username); ?></p><br />
+
               <input type="hidden" id="p_id" value = "<?php echo (isset($postresult->p_id))?$postresult->p_id:'';?>" /><p><?php echo $postresult->p_body; ?></p>
-              <p class="list-group-item-text" style="color:gray"><?php echo $postresult->age; ?></p><input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'Discussion/commentView/'.$postresult->p_id; ?>"></input><!--this is to pass urls to specific discussions-->
+              <p class="list-group-item-text" style="color:	#444444"><?php echo "Reply from ".ucfirst($postresult->username).""; ?></p><p class="list-group-item-text" style="color:gray"><?php echo $postresult->age; ?></p><input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'discussion/commentView/'.$postresult->p_id; ?>"></input><!--this is to pass urls to specific discussions-->
             </li>
           <?php endforeach;?>
   </div>

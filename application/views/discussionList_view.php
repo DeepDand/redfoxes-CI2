@@ -21,12 +21,17 @@
     font-style: normal;
     position:relative;
   }
+  body {
+    font-family: Algerian;
+  }
+  th { font-size: 18px; }
+  td { font-size: 16px; }
   </style>
 </head>
 <body>
 <?php @session_start();//echo form_open(base_url().'Discussion/discussionDetails','role="form"'); ?>
 <div>
-  <form name="dview" id="dview" method="post" class="form-group" style="width:100%;" action="<?php echo base_url().'Discussion/discussionDetails/'; ?>">
+  <form name="dview" id="dview" method="post" class="form-group" style="width:100%;" action="<?php echo base_url().'discussion/discussionDetails/'; ?>">
     <div id="new-search-area" class="new-search-area container container-fluid" style="width: 100%;"></div><br />
     <div id="new-drop-area" class="new-drop-area container container-fluid" style="width: 100%;"></div>
       <!--div-->
@@ -48,12 +53,12 @@
             foreach ($query->result() as $result) ://$this->input->post($result->d_id, $result->d_title, $result->cwid);?>
             <div>
               <tr>
-                <td><a id="anchorid" href="javascript:fetchList('<?php echo base_url().'Discussion/discussionDetails/'.$result->d_id; ?>')"><?php echo ucfirst($result->d_title); ?></a></td>
+                <td><a id="anchorid" href="javascript:fetchList('<?php echo base_url().'discussion/discussionDetails/'.$result->d_id; ?>')"><?php echo ucfirst($result->d_title); ?></a></td>
                 <td><?php echo ucfirst($result->username); ?></td>
                 <td><?php echo $result->category; ?></td>
                 <td><?php echo $result->age; ?></td>
                 <td class="hidden-xs hidden-sm hidden-md hidden-lg"><input type="hidden" id="d_id" name= "d_id" value ="<?php echo (isset($result->d_id))?$result->d_id:'';?>" required="required" /></td>
-                <td class="hidden-xs hidden-sm hidden-md hidden-lg"><input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'Discussion/discussionDetails/'.$result->d_id; ?>"></input></td><!--this is to pass urls to specific discussions -->
+                <td class="hidden-xs hidden-sm hidden-md hidden-lg"><input type="hidden" id="getURL" name="getURL" value="<?php echo base_url().'discussion/discussionDetails/'.$result->d_id; ?>"></input></td><!--this is to pass urls to specific discussions -->
               </tr>
             </div>
           <?php endforeach; ?>
